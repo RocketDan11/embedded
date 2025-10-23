@@ -1,0 +1,34 @@
+USARTx_BRR (Baud Rate Register)
+
+Defines Baud rate according to:
+BRR = \frac(f_ck, Baud) 
+eg: f_ck = 8 MHz, Baud = 9600,
+\frac(8,9600) ~~ 833
+
+Write this value directly to BRR
+```c
+USART1->BRR = 833u;
+```
+*integer approximation is sufficient for common baud.
+
+---
+
+USARTx_CR1 (Control Register 1)
+
+ Main control settings for transmitter and receiver
+ - TE (bit 3) -> Enable transmitter
+ - RE (bit 2) -> Enable receiver
+ - UE (bit 13) -> Enable USART peripheral
+ - RXNEIE (bit 5) -> Enable receive interrupt (optional)
+ - M1:M0 (bits 28 & 12) -> Set word length (00 = 8 bits)
+ - PCE (bit 10) -> Parity control enable (0 = no parity)
+ 
+ USARTx_CR2 (Control Register 2)
+ 
+ Configures stop bits and additional options
+ - STOP[1:0](bits 13:12) -> Stop bit selection
+ 	- 00 = 1 stop bit
+ 	- 10 = 2 stop bits
+ - Other fields are used for synchronous mode or clock settings (leave default for UART)
+ 
+ 
